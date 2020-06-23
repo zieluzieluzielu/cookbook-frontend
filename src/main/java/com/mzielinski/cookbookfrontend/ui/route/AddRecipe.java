@@ -28,6 +28,10 @@ public class AddRecipe extends VerticalLayout {
     RecipeDto recipe = new RecipeDto();
     Button save = new Button("Save");
     Button clearButton = new Button("Clear");
+    Button addIngredients = new Button("Add ingredients to this recipe",e -> getUI().ifPresent(ui -> ui.navigate("addingredient")));
+
+
+
 
     TextField recipeName = new TextField();
 
@@ -44,18 +48,27 @@ public class AddRecipe extends VerticalLayout {
 
         preparationTime.setHasControls(true);
         preparationTime.setMin(0);
-        recipeDetails.getStyle().set("minHeight", "150px");
-        recipeDetails.getStyle().set("maxHeight", "250px");
+        recipeDetails.getStyle().set("minWidth", "600px");
+        recipeDetails.getStyle().set("maxWidth", "700px");
+        recipeDetails.getStyle().set("minHeight", "400px");
         recipeDetails.setPlaceholder("Recipe description ...");
         recipeName.setPlaceholder("Recipe name ...");
 
+
         FormLayout formLayout = new FormLayout();
+
+        FormLayout formLayout2 = new FormLayout();
+;
+
+
+
 
         formLayout.addFormItem(recipeCategoryBox, "Recipe Category");
         formLayout.addFormItem(recipeName, "Recipe Name");
         formLayout.addFormItem(preparationTime, "Preparation time (in minutes)");
-        formLayout.addFormItem(recipeDetails, "Recipe details");
-        formLayout.addFormItem(userBox, "Autor");
+        formLayout.addFormItem(userBox, "Author");
+        formLayout2.addFormItem(recipeDetails, "Recipe details");
+
 
 
         HorizontalLayout actions = new HorizontalLayout();
@@ -63,7 +76,7 @@ public class AddRecipe extends VerticalLayout {
 
         VerticalLayout info = new VerticalLayout();
 
-        formLayout.add(save, clearButton, info);
+        formLayout2.add(save, clearButton, info);
 
         recipeCategoryBox.setRequiredIndicatorVisible(true);
         recipeName.setRequiredIndicatorVisible(true);
@@ -73,19 +86,36 @@ public class AddRecipe extends VerticalLayout {
 
         formLayout.setWidth("800px");
         formLayout.getStyle().set("margin", "0 auto");
-        formLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 1, FormLayout.ResponsiveStep.LabelsPosition.TOP),
-                new FormLayout.ResponsiveStep("490px", 3, FormLayout.ResponsiveStep.LabelsPosition.TOP));
+        formLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2, FormLayout.ResponsiveStep.LabelsPosition.TOP),
+                new FormLayout.ResponsiveStep("490px", 2, FormLayout.ResponsiveStep.LabelsPosition.TOP));
+
+        formLayout2.setWidth("800px");
+        formLayout.getStyle().set("margin", "0 auto");
+        formLayout2.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 1, FormLayout.ResponsiveStep.LabelsPosition.TOP),
+                new FormLayout.ResponsiveStep("490px", 1, FormLayout.ResponsiveStep.LabelsPosition.TOP));
+
 
         formLayout.setColspan(recipeCategoryBox, 2);
         formLayout.setColspan(recipeName, 2);
         formLayout.setColspan(preparationTime, 2);
-        formLayout.setColspan(recipeDetails, 2);
+        formLayout2.setColspan(recipeDetails, 2);
         formLayout.setColspan(userBox, 2);
 
-        formLayout.setColspan(save, 2);
-        formLayout.setColspan(clearButton, 2);
+        formLayout2.setColspan(save, 2);
+        formLayout2.setColspan(clearButton, 2);
 
-        add(formLayout);
+        //Layout
+        VerticalLayout mainLayout = new VerticalLayout();
+
+        mainLayout.setWidth("800px");
+        mainLayout.getStyle().set("margin", "0 auto");
+        mainLayout.setAlignItems(Alignment.CENTER);
+        add(mainLayout);
+        mainLayout.add(formLayout);
+
+        mainLayout.add(formLayout2);
+        mainLayout.add(addIngredients);
+
 
         userBox.setItems(userClient.getUsers());
         userBox.setRequired(true);

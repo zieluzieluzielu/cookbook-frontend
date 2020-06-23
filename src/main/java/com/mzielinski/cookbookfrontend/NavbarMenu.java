@@ -35,7 +35,7 @@ public class NavbarMenu extends AppLayout {
 
         MenuItem addRecipe = menuBar.addItem("Add a Recipe", e -> getUI().ifPresent(ui -> ui.navigate("addrecipe")));
 
-        MenuItem addIngredient = menuBar.addItem("Add an ingredient",
+        MenuItem addIngredient = menuBar.addItem("Add an Ingredient",
                 e -> getUI().ifPresent(ui -> ui.navigate("addingredient")));
 
         MenuItem addProduct = menuBar.addItem("Add a Product",
