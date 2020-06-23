@@ -6,6 +6,8 @@
 
 ## PROJECT DESCRIPTION
 
+Front-end was built with Vaadin 14.2.1 
+
 CookBook application was created to help in gathering recipes in one place (app), with matching specific wine (type and product with price) to the dish (based on products) and is counting nutrition values (kcal, carbohydrates, protein and fat) of each ingredient.
 
 Project is connected to two external API's: Spoonacular and Edamam.
