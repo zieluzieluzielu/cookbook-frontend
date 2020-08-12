@@ -45,11 +45,13 @@ public class AddRecipe extends VerticalLayout {
 
     public AddRecipe() {
         add(heading);
-
+        setWidth("800px");
+        setAlignItems(Alignment.BASELINE);
+        getStyle().set("margin", "0 auto");
         preparationTime.setHasControls(true);
         preparationTime.setMin(0);
-        recipeDetails.getStyle().set("minWidth", "600px");
-        recipeDetails.getStyle().set("maxWidth", "700px");
+        recipeDetails.getStyle().set("minWidth", "770px");
+        recipeDetails.getStyle().set("maxWidth", "800px");
         recipeDetails.getStyle().set("minHeight", "400px");
         recipeDetails.setPlaceholder("Recipe description ...");
         recipeName.setPlaceholder("Recipe name ...");

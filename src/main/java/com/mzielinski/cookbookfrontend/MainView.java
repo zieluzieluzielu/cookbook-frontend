@@ -1,9 +1,8 @@
 package com.mzielinski.cookbookfrontend;
-import com.vaadin.flow.component.Text;
+
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
@@ -23,8 +22,6 @@ public class MainView extends VerticalLayout {
     @PostConstruct
     public void init() {
         //FORM
-        Label htmlLabel = new Label("- dsd\n-dsds");
-
 
         H2 welcomeText = new H2("CookBook application");
         TextArea text1 = new TextArea();

@@ -14,6 +14,7 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,9 @@ public class Recipe extends VerticalLayout implements HasUrlParameter<Long> {
 
         HorizontalLayout container = new HorizontalLayout(heading, allRecipesButton);
         container.setAlignItems(Alignment.BASELINE);
+        container.setWidth("800px");
+        container.getStyle().set("margin", "0 auto");
+
         add(container);
 
         RecipeDto recipe = recipeClient.getRecipe(parameter);
@@ -76,7 +80,7 @@ public class Recipe extends VerticalLayout implements HasUrlParameter<Long> {
         recipeDetailsContainer.setAlignItems(Alignment.BASELINE);
 
         //PREPARATION TIME
-        H4 preparationTimeField = new H4("Preparation time: ");
+        H4 preparationTimeField = new H4("Preparation time : ");
         Text preparationTime = new Text(" " + recipe.getPreparationTime().toString());
         Text preparationTimeMinutes = new Text(" minutes");
 
@@ -94,7 +98,7 @@ public class Recipe extends VerticalLayout implements HasUrlParameter<Long> {
         if (ingredients.size() > 0) {
             List<String> ingredientList = new ArrayList<>();
             for (int i = 0; i < ingredients.size(); i++) {
-                ingredientList.add(ingredients.get(i).getAmount() + " " + ingredients.get(i).getUnit() + " " + products.get(i).getProductName());
+                ingredientList.add(ingredients.get(i).getAmount().doubleValue() + " " + ingredients.get(i).getUnit() + " " + products.get(i).getProductName());
             }
             String delimiter = "\n";
 
@@ -144,31 +148,30 @@ public class Recipe extends VerticalLayout implements HasUrlParameter<Long> {
 
         //Kcal
         Label kcalField = new Label("Calories: ");
-        Label kcalDetails = new Label(edamam.getNutrientsDto().getKcalDto().getQuantity() + " " + edamam.getNutrientsDto().getKcalDto().getUnit());
+        Label kcalDetails = new Label(edamam.getNutrientsDto().getKcalDto().getQuantity().setScale(1, RoundingMode.HALF_UP).doubleValue() + " " + edamam.getNutrientsDto().getKcalDto().getUnit());
         HorizontalLayout kcalContainer = new HorizontalLayout(kcalField, kcalDetails);
         kcalContainer.setAlignItems(Alignment.BASELINE);
 
         //Protein
         Label proteinField = new Label("Protein:");
-        Label proteinDetails = new Label(edamam.getNutrientsDto().getProteinDto().getQuantity() + " " + edamam.getNutrientsDto().getProteinDto().getUnit());
+        Label proteinDetails = new Label(edamam.getNutrientsDto().getProteinDto().getQuantity().setScale(1, RoundingMode.HALF_UP).doubleValue() + " " + edamam.getNutrientsDto().getProteinDto().getUnit());
         HorizontalLayout proteinContainer = new HorizontalLayout(proteinField, proteinDetails);
         proteinContainer.setAlignItems(Alignment.BASELINE);
 
         //Carbo
         Label carboField = new Label("Carbohydrates:");
-        Label carboDetails = new Label(edamam.getNutrientsDto().getCarbohydratesDto().getQuantity() + " " + edamam.getNutrientsDto().getCarbohydratesDto().getUnit());
+        Label carboDetails = new Label(edamam.getNutrientsDto().getCarbohydratesDto().getQuantity().setScale(1, RoundingMode.HALF_UP).doubleValue() + " " + edamam.getNutrientsDto().getCarbohydratesDto().getUnit());
         HorizontalLayout carboContainer = new HorizontalLayout(carboField, carboDetails);
         carboContainer.setAlignItems(Alignment.BASELINE);
 
         //Fat
         Label fatField = new Label("Fat: " + " ");
-        Label fatDetails = new Label(edamam.getNutrientsDto().getFatDto().getQuantity() + " " + edamam.getNutrientsDto().getFatDto().getUnit());
+        Label fatDetails = new Label(edamam.getNutrientsDto().getFatDto().getQuantity().setScale(1, RoundingMode.HALF_UP).doubleValue() + " " + edamam.getNutrientsDto().getFatDto().getUnit());
         HorizontalLayout fatContainer = new HorizontalLayout(fatField, fatDetails);
         fatContainer.setAlignItems(Alignment.BASELINE);
 
 
         //AUTHOR
-
         H4 authorField = new H4("Author: ");
         Button authorButton = new Button(user.getUserName());
         authorButton.addClickListener(click -> {
@@ -182,10 +185,11 @@ public class Recipe extends VerticalLayout implements HasUrlParameter<Long> {
         VerticalLayout recipeInformation = new VerticalLayout(categoryContainer, preparatiomTimeContainer, ingredientsContainer, ingredientsListContainer, recipeDetailsFieldContainer, recipeDetailsContainer, nutritionContainer, kcalContainer, proteinContainer, carboContainer, fatContainer, wineFieldContainer, wineBottomContainer
                 , authorContainer);
 
+        recipeInformation.setWidth("800px");
+        recipeInformation.getStyle().set("margin", "0 auto");
+
+
         add(recipeInformation);
-
-        setSizeFull();
-
 
     }
 }

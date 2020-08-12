@@ -1,24 +1,10 @@
 package com.mzielinski.cookbookfrontend;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.contextmenu.SubMenu;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.Command;
 import com.vaadin.flow.spring.annotation.UIScope;
-
-import javax.annotation.PostConstruct;
 
 @UIScope
 public class NavbarMenu extends AppLayout {
@@ -40,8 +26,6 @@ public class NavbarMenu extends AppLayout {
 
         MenuItem addProduct = menuBar.addItem("Add a Product",
                 e -> getUI().ifPresent(ui -> ui.navigate("addproduct")));
-
-
 
         MenuItem explore = menuBar.addItem("Explore");
 
